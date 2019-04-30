@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart' as prefix0;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Authen extends StatefulWidget {
   @override
@@ -18,7 +19,7 @@ class _AuthenState extends State<Authen> {
 
   Widget signInButton() {
     return RaisedButton(
-      color: Colors.orange[200],
+      color: Colors.red[200],
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       child: Text('Sign In'),
       onPressed: () {},
@@ -42,7 +43,7 @@ class _AuthenState extends State<Authen> {
 
   Widget showAppName() {
     return Text(
-      'Master Flutter',
+      'e-report2',
       style: TextStyle(
           fontFamily: 'Schoolbell',
           fontSize: 25.0,
@@ -52,7 +53,7 @@ class _AuthenState extends State<Authen> {
   }
 
   Widget showLogo() {
-    return Image.asset('images/logo.png');
+    return Image.asset('images/logo1.png');
   }
 
   @override
