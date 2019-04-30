@@ -10,11 +10,13 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    SystemChrome .setPreferredOrientations([DeviceOrientation.portraitUp,DeviceOrientation.portraitDown]);
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Vorwit Firbase',
-      home: Register(),
-      //home: Authen(),
+      //home: Register(),
+      home: Authen(),
     );
   }
 }
