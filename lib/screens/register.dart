@@ -1,4 +1,3 @@
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 
 class Register extends StatefulWidget {
@@ -7,10 +6,48 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  Widget passwordTextFormField() {
+    return TextFormField(
+      decoration: InputDecoration(
+          icon: Icon(
+            Icons.lock,
+            color: Colors.blue,
+          ),
+          labelText: 'Password :',
+          hintText: 'More 6 Charactor',
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15.0),
+              borderSide: BorderSide(width: 1.0, color: Colors.grey))),
+    );
+  }
+
+  Widget emailTextFormField() {
+    return TextFormField(
+      decoration: InputDecoration(
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15.0),
+              borderSide: BorderSide(width: 1.0, color: Colors.grey)),
+          labelText: 'Email :',
+          hintText: 'you@email.com',
+          icon: Icon(
+            Icons.email,
+            color: Colors.green,
+          )),
+    );
+  }
+
   Widget nameTextFormField() {
     return TextFormField(
-      decoration:
-          InputDecoration(labelText: 'Name', hintText: 'Type Your Name'),
+      decoration: InputDecoration(
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15.0),
+              borderSide: BorderSide(width: 1.0, color: Colors.grey)),
+          labelText: 'Name :',
+          hintText: 'Type Your Name',
+          icon: Icon(
+            Icons.face,
+            color: Colors.red,
+          )),
     );
   }
 
@@ -20,9 +57,22 @@ class _RegisterState extends State<Register> {
       appBar: AppBar(
         title: Text('Register'),
       ),
-      body: Container(padding: EdgeInsets.all(50.0),
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: RadialGradient(
+                colors: [Colors.white, Colors.purple[900]],
+                radius: 1.5,
+                center: Alignment(0, -1))),
+        padding: EdgeInsets.all(50.0),
         child: Column(
-          children: <Widget>[nameTextFormField()],
+          children: <Widget>[
+            nameTextFormField(),
+            Container(
+              margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
+              child: emailTextFormField(),
+            ),
+            passwordTextFormField()
+          ],
         ),
       ),
     );
