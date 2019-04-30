@@ -15,8 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Vorwit Firbase',
-      //home: Register(),
-      home: Authen(),
+      home: Register(),
+      //home: Authen(),
     );
   }
 }
