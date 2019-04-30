@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import './screens/authen.dart';
+import './screens/register.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,7 +13,8 @@ class MyApp extends StatelessWidget {
     SystemChrome .setPreferredOrientations([DeviceOrientation.portraitUp,DeviceOrientation.portraitDown]);
     return MaterialApp(
       title: 'Vorwit Firbase',
-      home: Authen(),
+      home: Register(),
+      //home: Authen(),
     );
   }
 }
