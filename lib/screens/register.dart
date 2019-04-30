@@ -20,7 +20,12 @@ class _RegisterState extends State<Register> {
           hintText: 'More 6 Charactor',
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15.0),
-              borderSide: BorderSide(width: 1.0, color: Colors.grey))),
+              borderSide: BorderSide(width: 1.0, color: Colors.grey))),validator: (String value) {
+                if (value.length <= 5) {
+                  return 'Please Type Password More 6 Charactor';
+                }
+              },
+              
     );
   }
 
@@ -35,7 +40,13 @@ class _RegisterState extends State<Register> {
           icon: Icon(
             Icons.email,
             color: Colors.green,
-          )),
+          )),validator: (String value){
+            if (value.length == 0) {
+              return 'Please Fill Email In The Blank';
+            } else if (!((value.contains('@')) && (value.contains('.')))) {
+              return 'Plese Fill Email Format';
+            }
+          },
     );
   }
 
@@ -73,13 +84,13 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(resizeToAvoidBottomPadding: false,
         appBar: AppBar(
           backgroundColor: Colors.blue[900],
           title: Text('Register'),
           actions: <Widget>[uploadButton()],
         ),
-        body: Form(
+        body: Form(key: formKey,
           child: Container(
             decoration: BoxDecoration(
                 gradient: RadialGradient(
