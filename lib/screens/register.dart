@@ -10,6 +10,11 @@ class _RegisterState extends State<Register> {
 //Explicit
   final formKey = GlobalKey<FormState>();
   String nameString, emailString, passwordString;
+  //For Firebase
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+
+  //For Snackbar
+  final snackBarKey = GlobalKey<ScaffoldState>();
 
   Widget passwordTextFormField() {
     return TextFormField(
@@ -27,7 +32,8 @@ class _RegisterState extends State<Register> {
         if (value.length <= 5) {
           return 'Please Type Password More 6 Charactor';
         }
-      },onSaved: (String value){
+      },
+      onSaved: (String value) {
         passwordString = value;
       },
     );
@@ -51,13 +57,12 @@ class _RegisterState extends State<Register> {
         } else if (!((value.contains('@')) && (value.contains('.')))) {
           return 'Plese Fill Email Format';
         }
-      },onSaved: (String value){
+      },
+      onSaved: (String value) {
         emailString = value;
       },
     );
   }
-
-
 
   Widget nameTextFormField() {
     return TextFormField(
@@ -90,15 +95,44 @@ class _RegisterState extends State<Register> {
         print('You Click Upload');
         if (formKey.currentState.validate()) {
           formKey.currentState.save();
-          print('name =$nameString,email = $emailString,password = $passwordString');
+          print(
+              'name =$nameString,email = $emailString,password = $passwordString');
+          uploadValueToFirebase();
         }
       },
     );
   }
 
+//ทำซ้ำจนสำเร็จ
+  void uploadValueToFirebase() async {
+    FirebaseUser firebaseUser = await firebaseAuth
+        .createUserWithEmailAndPassword(
+            email: emailString, password: passwordString)
+        .then((user) {
+      print('Register Success With ===> $user');
+    }).catchError((error) {
+      String errorString = error.message;
+      print('HAVE ERROR NA JA  =======> $errorString');
+      showSnackBar(errorString);
+    });
+  }
+
+  void showSnackBar(String messageString) {
+    SnackBar snackBar = SnackBar(
+      duration: Duration(seconds: 10),
+      backgroundColor: Colors.red[400],
+      content: Text(messageString),
+      action: SnackBarAction(
+        label: 'Close',onPressed: (){},
+      ),
+    );
+    snackBarKey.currentState.showSnackBar(snackBar);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: snackBarKey,
         resizeToAvoidBottomPadding: false,
         appBar: AppBar(
           backgroundColor: Colors.blue[900],
